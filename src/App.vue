@@ -29,17 +29,19 @@
         <div class="flex">
           <div class="max-w-xs">
             <label for="wallet" class="block text-sm font-medium text-gray-700"
-              >Тикер</label
+              >Тикер {{ticker}}</label
             >
             <div class="mt-1 relative rounded-md shadow-md">
               <input
+                v-model="ticker"
+                v-on:keydown.enter="add"
                 type="text"
                 name="wallet"
                 id="wallet"
                 class="block w-full pr-10 border-gray-300 text-gray-900 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md"
                 placeholder="Например DOGE"
               />
-            </div>
+            </div> 
             <div
               class="flex bg-white shadow-md p-1 rounded-md shadow-md flex-wrap"
             >
@@ -68,6 +70,7 @@
           </div>
         </div>
         <button
+          v-on:click="add"
           type="button"
           class="my-4 inline-flex items-center py-2 px-4 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-full text-white bg-gray-600 hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
         >
@@ -252,7 +255,18 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {
+      ticker: 'defaelt',
+      tickers: ["1", "2", "3", "4"]
+    };
+  },
+  methods: {
+    add(evt) {
+      alert(evt.key);
+    }
+  }
 };
 </script>
 
