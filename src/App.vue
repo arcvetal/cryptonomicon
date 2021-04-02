@@ -97,7 +97,7 @@
           <div
             v-for="t in tickers"
             :key="t.name"
-            @click="sel = t"
+            @click="select(t)"
             :class="sel === t ? 'border-4' : ''"
             class="bg-white overflow-hidden shadow rounded-lg border-purple-800 border-solid cursor-pointer"
           >
@@ -142,7 +142,8 @@
             v-for="(bar, idx) in normalizeGraph()"
             :key="idx"
             :style="{ height: `${bar}%` }"
-            class="bg-purple-800 border w-10 h-24"
+            class="bg-purple-800 border w-10
+            "
           ></div>
         </div>
         <button
@@ -204,9 +205,14 @@ export default {
         if (this.sel?.name === currentTicker.name) {
           this.graph.push(data.USD);
         }
-      }, 1500)
+      }, 3000)
       this.ticker = "";
     },
+
+    select (ticker) {
+        this.sel = ticker;
+        this.graph = [];
+      },
 
     handleDelete(tickerToRemove) {
       this.tickers = this.tickers.filter(t => t !== tickerToRemove);
